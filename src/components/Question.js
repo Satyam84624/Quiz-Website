@@ -10,6 +10,7 @@ export default function Question(props) {
   const [currentItem, setCurrentItem] = useState(0);
   const [rand, setRand] = useState(props.rand);
   const [loading, setLoading] = useState(true);
+  const [change, setChange] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [answerSelected, setAnswerSelected] = useState(false);
   const [key, setKey] = useState(false);
@@ -29,7 +30,7 @@ export default function Question(props) {
     // console.log(props.noOfQuestions);
     let data = await fetch(url);
     let parsedData = await data.json();
-    console.log(parsedData);
+    // console.log(parsedData);
     const decodedResults = parsedData.results.map((e) => ({
       question: he.decode(e.question),
       correct_answer: he.decode(e.correct_answer),
@@ -89,7 +90,7 @@ export default function Question(props) {
                     <div className="container my-3">
                       <form>
                         <h1>Question No. {i + 1} </h1>
-
+                        {change===false && setChange(true)}
                         <div className="mb-3">
                           <label className="form-label">
                             {element.question}
@@ -220,7 +221,7 @@ export default function Question(props) {
         }
         return null;
       })}
-      {currentItem + 1 > result.length && !loading && <Scorecard score={score} />}
+      {currentItem + 1 > result.length && !loading && <Scorecard score={score} change={change}/>}
     </>
   );
 }

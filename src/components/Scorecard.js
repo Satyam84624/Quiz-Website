@@ -4,7 +4,7 @@ export default function Scorecard(props) {
     <>
       <div className="d-flex justify-content-center align-items-center vh-100 flex-column">
         <div className="text-center">
-          <h1 style={{ color: "white" }}>Score: {props.score}</h1>
+          <h1 style={{ color: "white" }}>{props.change===true ? `score: ${props.score}` : "Error: Please reduce the No. of Questions!" } </h1>
         </div>
         <div>
           <form>
